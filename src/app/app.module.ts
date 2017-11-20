@@ -45,6 +45,10 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {FeaturesModule} from './pages/features/features.module';
 import {AlarmsModule} from './pages/alarms/alarms.module';
 import {ProfileModule} from './pages/profile/profile.module';
+import {ListEffects} from './core/ngrx/list/list.effects';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store/public_api';
+import {listReducer} from './core/ngrx/list/list.reducer';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -70,6 +74,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         AngularFireDatabaseModule,
         AngularFireAuthModule,
         AngularFirestoreModule,
+
+        // Ngrx
+        EffectsModule.forRoot([ListEffects]),
+        StoreModule.forRoot({
+            list: listReducer
+        }),
 
         RouterModule.forRoot([]),
 

@@ -40,7 +40,7 @@ export abstract class StoredDataService<T extends DataModel> {
                     res.$key = doc.payload.id;
                     return <T>res;
                 }));
-        });
+        }).debounceTime(5);
     }
 
     /**
