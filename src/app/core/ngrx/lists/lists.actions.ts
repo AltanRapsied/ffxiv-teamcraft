@@ -1,8 +1,8 @@
 import {Action} from '@ngrx/store';
 import {List} from '../../../model/list/list';
 
-export const FETCH_LISTS = 'Fetch LISTS';
-export const FETCH_LISTS_SUCCESS = 'Fetch LISTS Success';
+export const FETCH_USER_LISTS = 'Fetch User LISTS';
+export const FETCH_USER_LISTS_SUCCESS = 'Fetch User LISTS Success';
 
 export const FETCH_LIST = 'Fetch LIST';
 export const FETCH_LIST_SUCCESS = 'Fetch LIST Success';
@@ -16,15 +16,15 @@ export const ADD_LIST_SUCCESS = 'Add LIST Success';
 export const DELETE_LIST = 'Delete LIST';
 export const DELETE_LIST_SUCCESS = 'Delete LIST Success';
 
-export class FetchLists implements Action {
-    readonly type = FETCH_LISTS;
+export class FetchUserLists implements Action {
+    readonly type = FETCH_USER_LISTS;
 
-    constructor() {
+    constructor(public payload: string) {
     };
 }
 
-export class FetchListsSuccess implements Action {
-    readonly type = FETCH_LISTS_SUCCESS;
+export class FetchUserListsSuccess implements Action {
+    readonly type = FETCH_USER_LISTS_SUCCESS;
 
     constructor(public payload: List[]) {
     };
@@ -61,7 +61,7 @@ export class AddListSuccess implements Action {
 export class SaveList implements Action {
     readonly type = SAVE_LIST;
 
-    constructor() {
+    constructor(public payload: List) {
     };
 }
 
@@ -87,8 +87,8 @@ export class DeleteListSuccess implements Action {
 }
 
 export type All =
-    FetchLists
-    | FetchListsSuccess
+    | FetchUserLists
+    | FetchUserListsSuccess
     | FetchList
     | FetchListSuccess
     | SaveList

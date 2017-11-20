@@ -25,6 +25,8 @@ import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/do';
 import {SettingsService} from '../../settings/settings.service';
 import {ComponentWithSubscriptions} from '../../../core/component/component-with-subscriptions';
+import {ListState} from '../../../core/ngrx/lists/lists.reducer';
+import {Store} from '@ngrx/store';
 
 declare const ga: Function;
 
@@ -68,7 +70,8 @@ export class ListDetailsComponent extends ComponentWithSubscriptions implements 
                 private listManager: ListManagerService, private snack: MatSnackBar,
                 private translate: TranslateService, private router: Router,
                 private eorzeanTimeService: EorzeanTimeService,
-                private data: LocalizedDataService, public settings: SettingsService) {
+                private data: LocalizedDataService, public settings: SettingsService,
+                private store: Store<ListState>) {
         super();
         this.initFilters();
     }
@@ -129,7 +132,7 @@ export class ListDetailsComponent extends ComponentWithSubscriptions implements 
 
         this.subscriptions.push(this.route.params.subscribe(params => {
             this.listUid = params.listId;
-            this.list = this.listService.get(this.listUid);
+            this.list = this.store.select('lists');
             Observable.combineLatest(
                 this.filterTrigger,
                 this.list,
